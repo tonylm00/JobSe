@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -8,8 +8,21 @@ collection = db["jobse"]
 
 @app.route("/")
 def index():
-    documents = collection.find()
-    return render_template("index.html", documents=documents)
+    return render_template("index.html")
+
+@app.route('/viewAll')
+def viewAll():
+    all = collection.find()
+    return render_template("viewAll.html", documents=all)
+
+@app.route('/searchByCompany', methods=['POST'])
+def searchByCompany():
+    company = request.form.get("company")
+    query = {'name': {'$regex': company, '$options': 'i'}}
+    result = list(collection.find(query))
+    print(result)
+    return render_template("searchByCompany.html", documents=result)
+
 
 if __name__ == '__main__':
     app.run()

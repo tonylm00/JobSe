@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NBA Stats</title>
+  <title>JobSe</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -28,6 +28,31 @@
         </div>
       </div>
     </div>
+
+    <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+            <button class="btn btn-primary" type="button">
+                <a href={{url_for("viewAll")}}>View All</a>
+            </button>
+      </div>
+    </div>
+
+<div class="container">
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-6">
+      <form action="/searchByCompany" method="post">
+        <div class="input-group">
+          <input type="text" class="form-control" name="company" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Company</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
