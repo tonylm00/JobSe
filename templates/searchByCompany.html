@@ -32,22 +32,36 @@
             color: #0e76a8;
         }
     </style>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#"></a>
+        </nav>
+        <div class="jumbotron text-center">
+            <p class="lead">Risultati della ricerca</p>
+            <p class="player-name">{{ documents[0].name }}</p>
+            <p> Followers: {{ documents[0].linkedin_followers }}</p>
+        </div>
     <table>
-        <thead>
-            <tr>
-                {% for attribute in documents[0] %}
-                    <th>{{ attribute }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
         <tbody>
             {% for document in documents %}
                 <tr>
-                    {% for key, value in document.items() %}
-                        <td {% if key == 'Nome' %}class="player-name"{% endif %}>{{ value }}</td>
-                    {% endfor %}
+                <td>
+                    <p>{{document.designation}}</p>
+                </td>
+                <td>
+                    <p>{{document.work_type}}</p>
+                </td>
+                <td>
+                    <p>{{document.involvement}}</p>
+                </td>
+                <td>
+                    <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Scopri di più</button>
+                    </div>
+                </td>
                 </tr>
             {% endfor %}
         </tbody>

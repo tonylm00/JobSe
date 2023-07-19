@@ -20,9 +20,7 @@ def searchByCompany():
     company = request.form.get("company")
     query = {'name': {'$regex': company, '$options': 'i'}}
     result = list(collection.find(query))
-    print(result)
     return render_template("searchByCompany.html", documents=result)
-
 
 if __name__ == '__main__':
     app.run()
