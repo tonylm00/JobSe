@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Three Rows with Forms</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+}
+
+.row {
+    width: 100%;
+    box-sizing: border-box;
+    height: 33.33vh;
+}
+
+.form-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-container button:hover {
+    background-color: #45a049;
+}
+
+.form-container button[type="submit"] {
+    background-color: #007bff;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+    </style>
 </head>
 <body>
+    <div class="row" id="row1">
+        <form id="form1" class="form-container">
+            <!-- Content for the first form -->
+            <h2>Form 1</h2>
+            <label for="input1">Input 1:</label>
+            <input type="text" id="input1" name="input1" required>
+            <br>
+            <label for="input2">Input 2:</label>
+            <input type="text" id="input2" name="input2" required>
+            <br>
+            <button type="submit">Submit Form 1</button>
+        </form>
+    </div>
 
+    <div class="row" id="row2">
+        <form id="form2" class="form-container">
+            <!-- Content for the second form -->
+            <h2>Form 2</h2>
+            <label for="jobTitle">Job Title:</label>
+            <input type="text" id="jobTitle" name="jobTitle" required>
+            <br>
+            <label for="jobType">Job Type:</label>
+            <select id="jobType" name="jobType" required>
+                <!-- Options here -->
+            </select>
+            <br>
+            <button type="submit">Submit Form 2</button>
+        </form>
+    </div>
+
+    <div class="row" id="row3">
+        <form id="form3" class="form-container">
+            <!-- Content for the third form -->
+            <h2>Form 3</h2>
+            <label for="jobKind">Job Kind:</label>
+            <input type="text" id="jobKind" name="jobKind" required>
+            <br>
+            <label for="jobKindType">Job Kind Type:</label>
+            <select id="jobKindType" name="jobKindType" required>
+                <!-- Options here -->
+            </select>
+            <br>
+            <button type="submit">Submit Form 3</button>
+        </form>
+    </div>
 </body>
 </html>
