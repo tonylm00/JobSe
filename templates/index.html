@@ -142,11 +142,11 @@
 <body>
     <div class="container">
         <div class="navbar glass">
-            <a href="#">Home</a>
+            <a href="/">Home</a>
             <a href="#">Insert</a>
             <a href="#">Update</a>
             <a href="#">Delete</a>
-            <a href="#">Search</a>
+            <a href="/search">Search</a>
         </div>
 
         <div class="mid-section">
@@ -161,8 +161,8 @@
 
             <!-- Right Section -->
             <div class="right-section">
-                <form class="search-bar" action="/search" method="get">
-                    <input type="text" name="search" placeholder="Search...">
+                <form class="search-bar" action="/searchByDesignation" method="post">
+                    <input type="text" name="designation" placeholder="Search...">
                     <input type="submit" value="Search">
                 </form>
             </div>

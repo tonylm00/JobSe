@@ -11,17 +11,32 @@ collection = db["jobse"]
 def index():
     return render_template("index.html")
 
+@app.route("/search")
+def search():
+    return render_template("search.html")
+
+'''
 @app.route('/viewAll')
 def viewAll():
-    all = collection.find()
-    return render_template("viewAll.html", documents=all)
+    all = list(collection.find())
+    return render_template("query.html", jobs=all)
+
 
 @app.route('/searchByCompany', methods=['POST'])
 def searchByCompany():
     company = request.form.get("company")
     query = {'name': {'$regex': company, '$options': 'i'}}
     result = list(collection.find(query))
-    return render_template("searchByCompany.html", documents=result)
+    return render_template("query.html", jobs=result)
+
+'''
+
+@app.route('/searchByDesignation', methods=['POST'])
+def searchByDesignation():
+    des = request.form.get("designation")
+    query = {'designation': {'$regex': des, '$options': 'i'}}
+    result = list(collection.find(query))
+    return render_template("query.html", jobs=result)
 
 @app.route('/viewJob', methods=['POST'])
 def viewJob():
@@ -31,7 +46,7 @@ def viewJob():
     return render_template("viewJob.html", job=result)
 
 #OR tra due lavori
-@app.route('/viewJob', methods=['POST'])
+@app.route('/workORwork', methods=['POST'])
 def workORwork():
     work1 = request.form.get("work1")
     work2 = request.form.get("work2")
@@ -44,14 +59,14 @@ def workORwork():
     }
     result = list(collection.find(query))
 
-    return render_template("viewJob.html", jobs=result)
+    return render_template("query.html", jobs=result)
 
 #AND lavoro e work_type
-@app.route('/viewJob', methods=['POST'])
+@app.route('/workANDtype', methods=['POST'])
 def workANDtype():
     work = request.form.get("work")
     type = request.form.get("type")
-
+    print("work: ",work," type: ",type)
     query = {
         '$and': [
             {'designation': work},
@@ -59,29 +74,29 @@ def workANDtype():
         ]
     }
     result = list(collection.find(query))
-    return render_template("viewJob.html", jobs=result)
+    return render_template("query.html", jobs=result)
 
 #work_type AND salary OR work type AND salary
-@app.route('/viewJob', methods=['POST'])
-def workSalaryANDworkType():
+@app.route('/typeANDsalaryORsame', methods=['POST'])
+def typeANDsalaryORsame():
     work1 = request.form.get("work1")
-    salary1 = request.form.get("salary")
+    salary1 = request.form.get("salary1")
     work2 = request.form.get("work2")
-    salary2 = request.form.get("salary")
+    salary2 = request.form.get("salary2")
 
     query = {
         'or': [
             {
-                '$and': [{'designation': work1}, {'salary': salary1}]
+                '$and': [{'work_type': work1}, {'monthly_salary': {'$lt': salary1}}]
             },
             {
-                '$and': [{'designation': work2}, {'salary': salary2}]
+                '$and': [{'work_type': work2}, {'monthly_salary': {'$lt': salary2}}]
             }
         ]
     }
-
+    print(query)
     result = list(collection.find(query))
-    return render_template("viewJob.html", jobs=result)
+    return render_template("query.html", jobs=result)
 
 #Modifica offerta di lavoro
 @app.route('/updateJob', methods=['POST'])

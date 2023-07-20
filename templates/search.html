@@ -156,7 +156,7 @@
         }
 
         .input-container{
-            margin:30px;
+            margin:20px;
         }
     </style>
 </head>
@@ -167,13 +167,13 @@
                 <div class="form-container">
                     <!-- Content for the first form -->
                     <h2>Form 1</h2>
-                    <label for="input1">Job Title 1:</label>
-                    <input class="input" type="text" id="input1" name="input1" required>
-                    <br>
-                    <label for="input2">Job Title 2:</label>
-                    <input class="input" type="text" id="input2" name="input2" required>
-                    <br>
-                    <button type="submit" class="my-button">Search</button>
+                    <form action="/workORwork" method="post">
+                        <label for="input1">Job Title 1:</label>
+                        <input class="input" type="text" id="input1" name="work1" required>
+                        <label for="input2">Job Title 2:</label>
+                        <input class="input" type="text" id="input2" name="work2" required>
+                        <button type="submit" class="my-button">Search</button>
+                    </form>
                 </div>
             </div>
 
@@ -181,15 +181,17 @@
                 <div class="form-container">
                     <!-- Content for the second form -->
                     <h2>Form 2</h2>
+                    <form action="/workANDtype" method="post">
                     <label for="jobTitle">Job Title:</label>
-                    <input class="input" type="text" id="jobTitle" name="jobTitle" required>
-                    <br>
+                    <input class="input" type="text" id="jobTitle" name="work" required>
                     <label for="jobType">Job Type:</label>
-                    <select id="jobType" name="jobType" required>
-                        <!-- Options here -->
+                    <select id="jobType" name="type" required>
+                        <option value="On-site">On-site</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Hybrid">Hybrid</option>
                     </select>
-                    <br>
                     <button type="submit" class="my-button">Search</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -199,27 +201,36 @@
                 <!-- Content for the third form -->
                 <h2>Form 3</h2>
                 <div class="form-columns">
+                <form method="post" action="typeANDsalaryORsame">
                     <div class="input-container">
-                        <label for="jobKind">Job Type:</label>
-                        <input class="input" type="text" id="jobKind" name="jobKind" value="On Site" required readonly>
+                        <label for="jobType">Job Type:</label>
+                    <select id="jobType" name="work1" required>
+                        <option value="On-site">On-site</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
                     </div>
                     <div class="input-container">
                         <label for="salary">Salary:</label>
-                        <input class="input" type="number" id="salary" name="salary" required>
+                        <input class="input" type="number" id="salary" name="salary1" required>
                     </div>
                 </div>
                 <div class="form-columns">
                     <div class="input-container">
-                        <label for="jobKind2">Job Type:</label>
-                        <input class="input" type="text" id="jobKind2" name="jobKind2" value="Remote" required readonly>
+                        <label for="jobType">Job Type:</label>
+                    <select id="jobType" name="work2" required>
+                        <option value="On-site">On-site</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
                     </div>
                     <div class="input-container">
                         <label for="salary2">Salary:</label>
                         <input class="input" type="number" id="salary2" name="salary2" required>
                     </div>
                 </div>
-                <br>
                 <button type="submit" class="my-button">Search</button>
+                </form>
             </div>
         </div>
 
