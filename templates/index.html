@@ -1,61 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JobSe</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>My Web App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('../static/work.png'); /* Updated URL to include 'images/' */
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav { position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 64px;
+          background: rgba(255,255,255,0.4);
+          border-bottom: 1px solid rgba(225,225,225,0.5);
+          z-index: 1000;
+        }
+
+        .navbar a:hover {
+            background-color: #afc9f6;
+            color: black;
+        }
+
+        .container {
+            background-color: #ffffff;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex; /* Use flexbox to divide the container into two rows */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border:1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .mid-section {
+            margin: 20px auto;
+            margin-bottom: 5px;
+            padding: 10px;
+            padding-bottom: 5px;
+            display: flex; /* Use flexbox to divide the inner container into two columns */
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-section {
+            flex: 1; /* Take up 50% of the container width */
+            margin-right: 100px;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-section {
+            flex: 1; /* Take up 50% of the container width */
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-bar {
+            margin-top: 20px;
+            display: flex; /* Display the form and submit button on the same line */
+        }
+
+        .search-bar input[type="text"] {
+            margin-right: 5px; /* Add some spacing between the input and submit button */
+        }
+
+        /* Add media query for responsive layout */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+
+    </style>
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#"></a>
-    </nav>
-    <div class="jumbotron text-center">
-      <h1 class="display-4">JobSe</h1>
-      <p class="lead">Jobs Search</p>
-    </div>
-  </header>
-
-  <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-6">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">Go</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-6">
-            <button class="btn btn-primary" type="button">
-                <a href={{url_for("viewAll")}}>View All</a>
-            </button>
-      </div>
-    </div>
-
-<div class="container">
-  <div class="row justify-content-center mb-5">
-    <div class="col-md-6">
-      <form action="/searchByCompany" method="post">
-        <div class="input-group">
-          <input type="text" class="form-control" name="company" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">Company</button>
-          </div>
+        <div class="navbar glass">
+            <a href="#">Home</a>
+            <a href="#">Insert</a>
+            <a href="#">Update</a>
+            <a href="#">Delete</a>
+            <a href="#">Search</a>
         </div>
-      </form>
+
+        <div class="mid-section">
+            <img src="../static/logo.png" alt="Jobse Image" style="height: 300px;">
+        </div>
+
+        <div class="mid-section">
+            <!-- Left Section -->
+            <div class="left-section">
+                <h3>Who do you wanna be?</h3>
+            </div>
+
+            <!-- Right Section -->
+            <div class="right-section">
+                <form class="search-bar" action="/search" method="get">
+                    <input type="text" name="search" placeholder="Search...">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
