@@ -9,6 +9,10 @@
             background-image: url('../static/work.png'); /* Updated URL to include 'images/' */
             background-size: cover;
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .navbar {
@@ -98,10 +102,32 @@
         .search-bar {
             margin-top: 20px;
             display: flex; /* Display the form and submit button on the same line */
+            align-items: center; /* Center the items vertically */
+            border-radius: 20px; /* Add rounded corners */
+            overflow: hidden; /* Hide any overflowed content */
+            background-color: #ffffff; /* Background color similar to the navbar */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow */
         }
 
         .search-bar input[type="text"] {
-            margin-right: 5px; /* Add some spacing between the input and submit button */
+            flex: 1; /* Take up available space */
+            padding: 10px; /* Add some padding */
+            border: none; /* Remove the border */
+            background-color: transparent; /* Transparent background */
+            font-size: 16px; /* Adjust font size */
+            color: black; /* Text color */
+        }
+
+        .search-bar input[type="submit"] {
+            padding: 10px 20px; /* Add padding around the button */
+            background-color: #ffffff; /* Background color similar to the navbar */
+            border: none; /* Remove the border */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            color: black; /* Text color */
+        }
+
+        .search-bar input[type="submit"]:hover {
+            background-color: #afc9f6; /* Change background color on hover */
         }
 
         /* Add media query for responsive layout */
@@ -130,7 +156,7 @@
         <div class="mid-section">
             <!-- Left Section -->
             <div class="left-section">
-                <h3>Who do you wanna be?</h3>
+                <h3 style="margin-bottom: 2px;">Who do you wanna be?</h3>
             </div>
 
             <!-- Right Section -->

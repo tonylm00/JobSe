@@ -5,114 +5,224 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
         body {
-    margin: 0;
-    padding: 0;
-}
+            margin: 0;
+            padding: 0;
+            background-image: url('../static/work.png'); /* Updated URL to include 'images/' */
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-.row {
-    width: 100%;
-    box-sizing: border-box;
-    height: 33.33vh;
-}
+        .general {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally in the column */
+        }
 
-.form-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-}
+        .row {
+            width: 100%;
+            box-sizing: border-box;
+            height: 33.33vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
+        .form-container {
+            width: 80%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 280px; /* Set a fixed height for the form container */
+        }
 
-.form-container label {
-    display: block;
-    margin-bottom: 10px;
-}
+        .form-container-large {
+            width: 80%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 340px; /* Set a fixed height for the form container */
+        }
 
-.form-container input,
-.form-container select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.form-container button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
 
-.form-container button:hover {
-    background-color: #45a049;
-}
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-.form-container button[type="submit"] {
-    background-color: #007bff;
-}
+        /* Add media query for responsive layout */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
 
-.form-container button[type="submit"]:hover {
-    background-color: #0056b3;
-}
+        .input {
+            margin-top: 20px;
+            display: flex; /* Display the form and submit button on the same line */
+            align-items: center; /* Center the items vertically */
+            border-radius: 20px; /* Add rounded corners */
+            overflow: hidden; /* Hide any overflowed content */
+            background-color: #ffffff; /* Background color similar to the navbar */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+        }
 
+        .my-button {
+            padding: 10px 20px; /* Add padding around the button */
+            background-color: #afc9f6; /* Background color similar to the navbar */
+            border: none; /* Remove the border */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            color: black; /* Text color */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* New styles for the modified layout */
+
+        .general {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally in the column */
+        }
+
+        .first-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center; /* Center items horizontally in the row */
+            flex-wrap: wrap; /* Allow the forms to wrap if needed */
+        }
+
+        .column {
+            flex: 1; /* Each column takes equal space in the first row */
+            min-width: 300px; /* Set a minimum width for each column */
+            max-width: 500px; /* Set a maximum width for each column */
+            margin: 10px; /* Add some space between columns */
+            display: flex;
+            justify-content: center; /* Center items horizontally in the column */
+            align-items: center; /* Center items vertically in the column */
+        }
+
+        /* Update row3 to be centered in its container */
+        #row3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px; /* Set a taller height for the third row */
+        }
+
+        .form-columns {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Arrange the form columns side by side */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Add margin to the button */
+        button {
+            margin-top: 20px;
+        }
+
+        .input-container{
+            margin:30px;
+        }
     </style>
 </head>
 <body>
-    <div class="row" id="row1">
-        <form id="form1" class="form-container">
-            <!-- Content for the first form -->
-            <h2>Form 1</h2>
-            <label for="input1">Input 1:</label>
-            <input type="text" id="input1" name="input1" required>
-            <br>
-            <label for="input2">Input 2:</label>
-            <input type="text" id="input2" name="input2" required>
-            <br>
-            <button type="submit">Submit Form 1</button>
-        </form>
-    </div>
+    <div class="general">
+        <div class="first-row">
+            <div class="column" id="col1">
+                <div class="form-container">
+                    <!-- Content for the first form -->
+                    <h2>Form 1</h2>
+                    <label for="input1">Job Title 1:</label>
+                    <input class="input" type="text" id="input1" name="input1" required>
+                    <br>
+                    <label for="input2">Job Title 2:</label>
+                    <input class="input" type="text" id="input2" name="input2" required>
+                    <br>
+                    <button type="submit" class="my-button">Search</button>
+                </div>
+            </div>
 
-    <div class="row" id="row2">
-        <form id="form2" class="form-container">
-            <!-- Content for the second form -->
-            <h2>Form 2</h2>
-            <label for="jobTitle">Job Title:</label>
-            <input type="text" id="jobTitle" name="jobTitle" required>
-            <br>
-            <label for="jobType">Job Type:</label>
-            <select id="jobType" name="jobType" required>
-                <!-- Options here -->
-            </select>
-            <br>
-            <button type="submit">Submit Form 2</button>
-        </form>
-    </div>
+            <div class="column" id="col2">
+                <div class="form-container">
+                    <!-- Content for the second form -->
+                    <h2>Form 2</h2>
+                    <label for="jobTitle">Job Title:</label>
+                    <input class="input" type="text" id="jobTitle" name="jobTitle" required>
+                    <br>
+                    <label for="jobType">Job Type:</label>
+                    <select id="jobType" name="jobType" required>
+                        <!-- Options here -->
+                    </select>
+                    <br>
+                    <button type="submit" class="my-button">Search</button>
+                </div>
+            </div>
+        </div>
 
-    <div class="row" id="row3">
-        <form id="form3" class="form-container">
-            <!-- Content for the third form -->
-            <h2>Form 3</h2>
-            <label for="jobKind">Job Kind:</label>
-            <input type="text" id="jobKind" name="jobKind" required>
-            <br>
-            <label for="jobKindType">Job Kind Type:</label>
-            <select id="jobKindType" name="jobKindType" required>
-                <!-- Options here -->
-            </select>
-            <br>
-            <button type="submit">Submit Form 3</button>
-        </form>
+        <div class="row" id="row3">
+            <div class="form-container-large">
+                <!-- Content for the third form -->
+                <h2>Form 3</h2>
+                <div class="form-columns">
+                    <div class="input-container">
+                        <label for="jobKind">Job Type:</label>
+                        <input class="input" type="text" id="jobKind" name="jobKind" value="On Site" required readonly>
+                    </div>
+                    <div class="input-container">
+                        <label for="salary">Salary:</label>
+                        <input class="input" type="number" id="salary" name="salary" required>
+                    </div>
+                </div>
+                <div class="form-columns">
+                    <div class="input-container">
+                        <label for="jobKind2">Job Type:</label>
+                        <input class="input" type="text" id="jobKind2" name="jobKind2" value="Remote" required readonly>
+                    </div>
+                    <div class="input-container">
+                        <label for="salary2">Salary:</label>
+                        <input class="input" type="number" id="salary2" name="salary2" required>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="my-button">Search</button>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
