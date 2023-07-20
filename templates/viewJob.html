@@ -41,32 +41,18 @@
         </nav>
         <div class="jumbotron text-center">
             <p class="lead">Risultati della ricerca</p>
-            <p class="player-name">{{ documents[0].name }}</p>
-            <p> Followers: {{ documents[0].linkedin_followers | int  }}</p>
+            <p class="player-name">{{ job.name }}</p>
         </div>
     <table>
         <tbody>
-            {% for document in documents %}
                 <tr>
-                <td>
-                    <p>{{document.designation}}</p>
-                </td>
-                <td>
-                    <p>{{document.work_type}}</p>
-                </td>
-                <td>
-                    <p>{{document.involvement}}</p>
-                </td>
-                <td>
-                    <div class="input-group-append">
-                        <form action="/viewJob" method="post">
-                            <input type="hidden" value="{{ document._id }}" name="work">
-                    <button class="btn btn-primary" type="submit">Scopri di più</button>
-                        </form>
-                    </div>
-                </td>
+                    <td>
+                        <p>{{job.job_details}}</p>
+                    </td>
+                    <td>
+                        <p>{{job.industry}}</p>
+                    </td>
                 </tr>
-            {% endfor %}
         </tbody>
     </table>
 </body>
