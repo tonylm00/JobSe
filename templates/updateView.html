@@ -114,6 +114,23 @@
             align-items: center; /* Center vertically */
             /* Add any additional styles as needed */
         }
+
+        .pagination {
+            display: flex;
+    justify-content: center;
+        }
+
+        .pagination a {
+          color: black;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+        }
+
+        .current_page{
+            background-color: #007bff;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -131,8 +148,8 @@
         {% endif %}
     </div>
     <div class="container-search">
-        <form class="search-bar" action="/search" method="get">
-            <input placeholder="Insert Job Offer Id" class="input" type="text" id="Idjob" name="seach" style="width: 100%">
+        <form class="search-bar" action="/searchById" method="get">
+            <input placeholder="Insert Job Offer Id" class="input" type="text" id="Idjob" name="Idjob" style="width: 100%">
             <input type="submit" value="Search">
         </form>
     </div>
@@ -161,5 +178,19 @@
             </div>
         {% endfor %}
     </div>
+    <div class="pagination">
+    {% if current_page > 1 %}
+        <a href="/updateView?page={{ current_page - 1 }}">&laquo;</a>
+    {% endif %}
+
+    {% for page in range(start_page, end_page + 1) %}
+        <a class="page-link {% if page == current_page %}current_page{% endif %}"
+           href="/updateView?page={{ page }}">{{ page }}</a>
+    {% endfor %}
+
+    {% if current_page < total_pages %}
+        <a href="/updateView?page={{ current_page + 1 }}">&raquo;</a>
+    {% endif %}
+</div>
 </body>
 </html>

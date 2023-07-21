@@ -103,8 +103,24 @@ def typeANDsalaryORsame():
 
 @app.route('/updateView')
 def updateView():
+    page_number = request.args.get("page")  # Get the value of the 'page' parameter
+    page_number = int(page_number)
+
+    # Calcola gli indici di inizio e fine dell'intervallo dell'array
+    start_index = (page_number - 1) * 20
+    end_index = start_index + 20
+
+    start_page = max(1, page_number - 5)
+    # Calcola il punto di arrivo del ciclo
+    end_page = page_number + 5
+
     jobs = list(collection.find())  # Fetch job data from the database
-    return render_template("updateView.html", jobs=jobs)
+    page_data = jobs[start_index:end_index]
+    return render_template("updateView.html", jobs=page_data,
+        current_page=page_number,
+        total_pages=280,
+        start_page=start_page,
+        end_page=end_page)
 
 @app.route('/updateJob/<string:job_id>', methods=['GET', 'POST'])
 def updateJob(job_id):
@@ -165,6 +181,13 @@ def insertJob():
         message = ""
 
     return render_template("insert.html", message=message)
+
+@app.route('/searchById', methods=['GET', 'POST'])
+def searchByID():
+    work = request.form.get("Idjob")
+    print(work)
+    job = list(collection.find_one({"_id": ObjectId(work)}))
+    return render_template("updateView.html", jobs= job)
 
 if __name__ == '__main__':
     app.run()
