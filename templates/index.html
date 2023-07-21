@@ -162,12 +162,58 @@
 
             <!-- Right Section -->
             <div class="right-section">
-                <form class="search-bar" action="/searchByDesignation" method="post">
-                    <input type="text" name="designation" placeholder="Search...">
+                <form class="search-bar" action="/search" method="get">
+                    <input class="input" type="text" id="jobTitleList" list="jobTitlesList" name="seach" required>
+                    <datalist id="jobTitlesList">
+                        <!-- Use JavaScript to generate the options dynamically -->
+                    </datalist>
                     <input type="submit" value="Search">
                 </form>
             </div>
         </div>
     </div>
+<script>
+        // Predefined list of job titles
+        var job_titles =  [
+            'Data Analyst', 'Shopify Developer', 'Database Developer', 'Other',
+            'Other Developer', 'Salesforce Developer', 'Golang Developer',
+            'Lead developer', '.Net Developers', 'PHP Developer', 'SQL Developer',
+            'Java Developer', 'Other Engineering', 'Software Engineer',
+            'Python Developer', 'PowerApps Developer', 'Cloud Engineer',
+            'Snowflake Developer', 'Angular Developer', 'Oracle Developer',
+            'DevOps Engineer', 'Software Testing', 'Internships', 'Power BI Developer',
+            'Blockchain Developer', 'C Developer', ' Ruby on Rails Developer',
+            'Machine Learning Engineer', 'Game Developer', 'Mainframe Developer',
+            'Analyst', 'Unity Developer', 'Business Analyst',
+            'Mobile Application Developer', 'Full Stack Developer', 'Web Developer',
+            'Linux Engineer', 'Drupal Developer', 'Technology Architecture',
+            'Wordpress Developer', 'BackEnd Developer', 'Node Js Developer',
+            'Consultant', 'Associate', 'Researcher', 'Accountant', 'Finance Manager',
+            'Search Engine Optimization', 'Project Manager', 'Sales Executive',
+            'Business Development Manager', 'Digital Marketing', 'Scrum Master',
+            'Team Lead/ Project Lead', 'SAP Developer', 'Quality Analyst',
+            'Vue.js Developer', 'ReactJS Developer', 'Robotics', 'iOS Developer',
+            'Collections Specialist', 'AI Engineer', 'Managerial and Leadership Roles',
+            'Quantitative Trader', 'Marketing', 'Copywriter', 'Co-Founder', 'Editor',
+            'Customer Service', 'Frontend Developer', 'Front-End Developer',
+            'Data Scientist', 'Technical Trainer/Writer/Owner', 'Professor',
+            'Education and Counseling', 'Head of Product', 'Product Specialist',
+            'Content Writer', 'Data Management', 'Financial Controller',
+            'Bigdata Developer', 'Relationship Manager', 'Salesperson'
+        ];
+
+        // Function to generate the options for the datalist element
+        function generateDatalistOptions() {
+            var datalist = document.getElementById('jobTitlesList');
+            for (var i = 0; i < job_titles.length; i++) {
+                var option = document.createElement('option');
+                option.value = job_titles[i];
+                datalist.appendChild(option);
+            }
+        }
+
+        // Call the function to generate datalist options when the page loads
+        window.onload = generateDatalistOptions;
+    </script>
 </body>
 </html>

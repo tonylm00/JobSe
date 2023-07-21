@@ -4,7 +4,7 @@
     <title>Three Rows with Forms</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
-        body {
+         body {
             margin: 0;
             padding: 0;
             background-image: url('../static/work.png'); /* Updated URL to include 'images/' */
@@ -42,7 +42,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 280px; /* Set a fixed height for the form container */
         }
 
         .form-container-large {
@@ -156,7 +155,7 @@
         }
 
         .input-container{
-            margin:20px;
+            margin:30px;
         }
     </style>
 </head>
@@ -166,32 +165,31 @@
             <div class="column" id="col1">
                 <div class="form-container">
                     <!-- Content for the first form -->
-                    <h2>Form 1</h2>
-                    <form action="/workORwork" method="post">
-                        <label for="input1">Job Title 1:</label>
-                        <input class="input" type="text" id="input1" name="work1" required>
-                        <label for="input2">Job Title 2:</label>
-                        <input class="input" type="text" id="input2" name="work2" required>
-                        <button type="submit" class="my-button">Search</button>
-                    </form>
+                    <h2>Search 1</h2>
+                    <label for="input1">Job Title 1:</label>
+                    <select class="input" id="input1" name="input1" required></select>
+                    <br>
+                    <label for="input2">Job Title 2:</label>
+                    <select class="input" id="input2" name="input2" required></select>
+                    <br>
+                    <button type="submit" class="my-button">Search</button>
                 </div>
             </div>
 
             <div class="column" id="col2">
                 <div class="form-container">
                     <!-- Content for the second form -->
-                    <h2>Form 2</h2>
-                    <form action="/workANDtype" method="post">
+                    <h2>Search 2</h2>
                     <label for="jobTitle">Job Title:</label>
-                    <input class="input" type="text" id="jobTitle" name="work" required>
+                    <select class="input" id="input1" name="input1" required></select>
+                    <br>
                     <label for="jobType">Job Type:</label>
-                    <select id="jobType" name="type" required>
-                        <option value="On-site">On-site</option>
-                        <option value="Remote">Remote</option>
-                        <option value="Hybrid">Hybrid</option>
+                    <select id="jobType" name="jobType" required>
+                        <option value="opel">On-site</option>
+                        <option value="audi">Remote</option>
                     </select>
+                    <br>
                     <button type="submit" class="my-button">Search</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -199,41 +197,80 @@
         <div class="row" id="row3">
             <div class="form-container-large">
                 <!-- Content for the third form -->
-                <h2>Form 3</h2>
+                <h2>Search 3</h2>
                 <div class="form-columns">
-                <form method="post" action="typeANDsalaryORsame">
                     <div class="input-container">
-                        <label for="jobType">Job Type:</label>
-                    <select id="jobType" name="work1" required>
-                        <option value="On-site">On-site</option>
-                        <option value="Remote">Remote</option>
-                        <option value="Hybrid">Hybrid</option>
-                    </select>
+                        <label for="jobKind">Job Type:</label>
+                        <input class="input" type="text" id="jobKind" name="jobKind" value="On Site" required readonly>
                     </div>
                     <div class="input-container">
                         <label for="salary">Salary:</label>
-                        <input class="input" type="number" id="salary" name="salary1" required>
+                        <input class="input" type="number" id="salary" name="salary" required>
                     </div>
                 </div>
                 <div class="form-columns">
                     <div class="input-container">
-                        <label for="jobType">Job Type:</label>
-                    <select id="jobType" name="work2" required>
-                        <option value="On-site">On-site</option>
-                        <option value="Remote">Remote</option>
-                        <option value="Hybrid">Hybrid</option>
-                    </select>
+                        <label for="jobKind2">Job Type:</label>
+                        <input class="input" type="text" id="jobKind2" name="jobKind2" value="Remote" required readonly>
                     </div>
                     <div class="input-container">
                         <label for="salary2">Salary:</label>
                         <input class="input" type="number" id="salary2" name="salary2" required>
                     </div>
                 </div>
+                <br>
                 <button type="submit" class="my-button">Search</button>
-                </form>
             </div>
         </div>
-
     </div>
+
+    <script>
+        // Predefined list of job titles
+        var job_titles = [
+            'Data Analyst', 'Shopify Developer', 'Database Developer', 'Other',
+            'Other Developer', 'Salesforce Developer', 'Golang Developer',
+            'Lead developer', '.Net Developers', 'PHP Developer', 'SQL Developer',
+            'Java Developer', 'Other Engineering', 'Software Engineer',
+            'Python Developer', 'PowerApps Developer', 'Cloud Engineer',
+            'Snowflake Developer', 'Angular Developer', 'Oracle Developer',
+            'DevOps Engineer', 'Software Testing', 'Internships', 'Power BI Developer',
+            'Blockchain Developer', 'C Developer', ' Ruby on Rails Developer',
+            'Machine Learning Engineer', 'Game Developer', 'Mainframe Developer',
+            'Analyst', 'Unity Developer', 'Business Analyst',
+            'Mobile Application Developer', 'Full Stack Developer', 'Web Developer',
+            'Linux Engineer', 'Drupal Developer', 'Technology Architecture',
+            'Wordpress Developer', 'BackEnd Developer', 'Node Js Developer',
+            'Consultant', 'Associate', 'Researcher', 'Accountant', 'Finance Manager',
+            'Search Engine Optimization', 'Project Manager', 'Sales Executive',
+            'Business Development Manager', 'Digital Marketing', 'Scrum Master',
+            'Team Lead/ Project Lead', 'SAP Developer', 'Quality Analyst',
+            'Vue.js Developer', 'ReactJS Developer', 'Robotics', 'iOS Developer',
+            'Collections Specialist', 'AI Engineer', 'Managerial and Leadership Roles',
+            'Quantitative Trader', 'Marketing', 'Copywriter', 'Co-Founder', 'Editor',
+            'Customer Service', 'Frontend Developer', 'Front-End Developer',
+            'Data Scientist', 'Technical Trainer/Writer/Owner', 'Professor',
+            'Education and Counseling', 'Head of Product', 'Product Specialist',
+            'Content Writer', 'Data Management', 'Financial Controller',
+            'Bigdata Developer', 'Relationship Manager', 'Salesperson'
+        ];
+
+        // Function to populate the options for select elements
+        function populateOptions() {
+            var selectElements = document.getElementsByClassName('input');
+            for (var i = 0; i < selectElements.length; i++) {
+                var selectElement = selectElements[i];
+                for (var j = 0; j < job_titles.length; j++) {
+                    var option = document.createElement('option');
+                    option.text = job_titles[j];
+                    option.value = job_titles[j];
+                    selectElement.appendChild(option);
+                }
+            }
+
+        }
+
+        // Call the function to populate options when the page loads
+        window.onload = populateOptions;
+    </script>
 </body>
 </html>
