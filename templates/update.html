@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Modify Offers</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -97,8 +98,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">Jobse</a>
         <a class="navbar-text" href="/insertJob">Insert</a>
-        <a class="navbar-text" href="/updateView">Update</a>
-        <a class="navbar-text" href="/updateView">Delete</a>
+        <a class="navbar-text" href="/updateView?page=1">Update</a>
+        <a class="navbar-text" href="/updateView?page=1">Delete</a>
         <a class="navbar-text" href="/search">Search</a>
     </nav>
 <div class="jumbotron">
@@ -106,46 +107,46 @@
 </div>
 
 <div class="results-container">
-    <form action="/updateJob/{{ job['_id'] }}" method="POST">
+    <form action="/updateJob/{{ job['_id'] }}?page={{current_page}}" method="POST">
         <input type="hidden" name="id" id="designation">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name" placeholder="{{ job.name }}" required>
+            <input type="text" name="name" id="name" value="{{ job.name }}" required>
         </div>
 
         <div class="form-group">
             <label for="designation">Designation:</label>
-            <input type="text" name="designation" id="designation" placeholder={{ job.designation }} required>
+            <input type="text" name="designation" id="designation" value={{ job.designation }} required>
         </div>
 
         <div class="form-group">
             <label for="work_type">Work Type:</label>
-            <input type="text" name="work_type" id="work_type" placeholder={{ job.work_type }} required>
+            <input type="text" name="work_type" id="work_type" value={{ job.work_type }} required>
         </div>
 
         <div class="form-group">
             <label for="involvement">Involvement:</label>
-            <input type="text" name="involvement" id="involvement" placeholder={{ job.involvement }} required>
+            <input type="text" name="involvement" id="involvement" value={{ job.involvement }} required>
         </div>
 
         <div class="form-group">
             <label for="level">Level:</label>
-            <input type="text" name="level" id="level" placeholder={{ job.level }} required>
+            <input type="text" name="level" id="level" value={{ job.level }} required>
         </div>
 
         <div class="form-group">
             <label for="City">City:</label>
-            <input type="text" name="City" id="City" placeholder={{ job.City }} required>
+            <input type="text" name="City" id="City" value={{ job.City }} required>
         </div>
 
         <div class="form-group">
             <label for="State">State:</label>
-            <input type="text" name="State" id="State" placeholder={{ job.State }} required>
+            <input type="text" name="State" id="State" value={{ job.State }} required>
         </div>
 
         <div class="form-group">
             <label for="monthly_salary">Monthly Salary:</label>
-            <input type="text" name="monthly_salary" id="monthly_salary" placeholder={{job.monthly_salary}} required>
+            <input type="text" name="monthly_salary" id="monthly_salary" value={{job.monthly_salary}} required>
         </div>
 
         <button class="btn btn-primary btn-insert" type="submit">Update</button>

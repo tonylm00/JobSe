@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Modify Offers</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -137,8 +138,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">Jobse</a>
         <a class="navbar-text" href="/insertJob">Insert</a>
-        <a class="navbar-text" href="/updateView">Update</a>
-        <a class="navbar-text" href="/updateView">Delete</a>
+        <a class="navbar-text" href="/updateView?page=1">Update</a>
+        <a class="navbar-text" href="/updateView?page=1">Delete</a>
         <a class="navbar-text" href="/search">Search</a>
     </nav>
     <div class="jumbotron">
@@ -149,7 +150,7 @@
     </div>
     <div class="container-search">
         <form class="search-bar" action="/searchById" method="get">
-            <input placeholder="Insert Job Offer Id" class="input" type="text" id="Idjob" name="Idjob" style="width: 100%">
+            <input placeholder="Insert Job Offer Id" class="input" type="text" id="Idjob" name="searchId" style="width: 100%">
             <input type="submit" value="Search">
         </form>
     </div>
@@ -170,8 +171,8 @@
                     </p>
                 </div>
                 <div class="input-group-append">
-                    <a class="btn btn-primary" href="{{ url_for('updateJob', job_id=job._id) }}">Update</a>
-                    <form action="/deleteJob/{{ job._id }}" method="POST">
+                    <a class="btn btn-primary" href="{{ url_for('updateJob', job_id=job._id) }}?page={{current_page}}">Update</a>
+                    <form action="/deleteJob/{{ job._id }}?page={{ current_page}}" method="POST">
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </div>
@@ -179,7 +180,8 @@
         {% endfor %}
     </div>
     <div class="pagination">
-    {% if current_page > 1 %}
+    {% if current_page is defined %}
+            {% if current_page > 1 %}
         <a href="/updateView?page={{ current_page - 1 }}">&laquo;</a>
     {% endif %}
 
@@ -190,6 +192,7 @@
 
     {% if current_page < total_pages %}
         <a href="/updateView?page={{ current_page + 1 }}">&raquo;</a>
+    {% endif %}
     {% endif %}
 </div>
 </body>

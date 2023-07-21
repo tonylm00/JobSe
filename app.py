@@ -115,6 +115,7 @@ def updateView():
     end_page = page_number + 5
 
     jobs = list(collection.find())  # Fetch job data from the database
+    print(jobs)
     page_data = jobs[start_index:end_index]
     return render_template("updateView.html", jobs=page_data,
         current_page=page_number,
@@ -124,6 +125,7 @@ def updateView():
 
 @app.route('/updateJob/<string:job_id>', methods=['GET', 'POST'])
 def updateJob(job_id):
+    page_number = request.args.get("page")  # Get the value of the 'page' parameter
     if request.method == 'POST':
         try:
             job = {
@@ -139,24 +141,58 @@ def updateJob(job_id):
             }
             collection.update_one({"_id": ObjectId(job_id)}, {"$set": job})
             message = "Job announcement data successfully updated"
-            return render_template("updateView.html", message=message, jobs=list(collection.find()))
+            page_number = int(page_number)
+
+            # Calcola gli indici di inizio e fine dell'intervallo dell'array
+            start_index = (page_number - 1) * 20
+            end_index = start_index + 20
+
+            start_page = max(1, page_number - 5)
+            # Calcola il punto di arrivo del ciclo
+            end_page = page_number + 5
+
+            jobs = list(collection.find())  # Fetch job data from the database
+            page_data = jobs[start_index:end_index]
+            return render_template("updateView.html", message=message, jobs=page_data, current_page = page_number,
+                        total_pages=280,
+                        start_page=start_page,
+                        end_page=end_page)
         except PyMongoError as e:
             message = "Error while updating the job ad.: " + str(e)
     else:
         job = collection.find_one({"_id": ObjectId(job_id)})  # Fetch the specific job details
         message = ""
 
-    return render_template("update.html", job=job, message=message)
+    return render_template("update.html", job=job, message=message, current_page = page_number)
 
 #Eliminazione offerta di lavoro
 @app.route('/deleteJob/<string:job_id>', methods=['POST'])
 def deleteJob(job_id):
     try:
         collection.delete_one({"_id": ObjectId(job_id)})
-        message = "Job ad successfully deleted"
+        message = "Job is successfully deleted"
     except PyMongoError as e:
         message = "Error while deleting job announcement" + str(e)
-    return render_template("updateView.html", jobs=list(collection.find()), message=message)
+
+    page_number = request.args.get("page")  # Get the value of the 'page' parameter
+    page_number = int(page_number)
+
+    # Calcola gli indici di inizio e fine dell'intervallo dell'array
+    start_index = (page_number - 1) * 20
+    end_index = start_index + 20
+
+    start_page = max(1, page_number - 5)
+    # Calcola il punto di arrivo del ciclo
+    end_page = page_number + 5
+
+    jobs = list(collection.find())  # Fetch job data from the database
+    page_data = jobs[start_index:end_index]
+    return render_template("updateView.html", jobs=page_data,
+                           message = message,
+                           current_page=page_number,
+                           total_pages=280,
+                           start_page=start_page,
+                           end_page=end_page)
 
 @app.route('/insertJob', methods=['GET', 'POST'])
 def insertJob():
@@ -184,10 +220,9 @@ def insertJob():
 
 @app.route('/searchById', methods=['GET', 'POST'])
 def searchByID():
-    work = request.form.get("Idjob")
-    print(work)
-    job = list(collection.find_one({"_id": ObjectId(work)}))
-    return render_template("updateView.html", jobs= job)
+    work = request.args.get("searchId")
+    job = collection.find_one({"_id": ObjectId(work)})
+    return render_template("updateView.html", jobs = [job])
 
 if __name__ == '__main__':
     app.run()
