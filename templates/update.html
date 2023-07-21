@@ -1,10 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .results-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .jumbotron {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .lead {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .bold-name {
+            font-weight: bold;
+            color: #0e76a8;
+        }
+
+        .result-item {
+            border: 1px solid #e1e1e1;
+            background-color: #ffffff;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-item-text {
+            flex-grow: 1;
+        }
+
+        .salary-luogo {
+            text-align: right;
+            color: #6c757d;
+            flex-grow: 1;
+            padding-right: 20px;
+      }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+           .navbar-text{
+            padding: 15px;
+            collapse: 1;
+        }
+                   .results-container {
+            max-width: 60%;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            width: 30%;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .form-group input {
+            width: 70%;
+        }
+
+        .btn-insert {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">Jobse</a>
+        <a class="navbar-text" href="/insertJob">Insert</a>
+        <a class="navbar-text" href="/updateView">Update</a>
+        <a class="navbar-text" href="/updateView">Delete</a>
+        <a class="navbar-text" href="/search">Search</a>
+    </nav>
+<div class="jumbotron">
+    <p class="bold-name">Update a job</p>
+</div>
 
+<div class="results-container">
+    <form action="/updateJob/{{ job['_id'] }}" method="POST">
+        <input type="hidden" name="id" id="designation">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="{{ job.name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="designation">Designation:</label>
+            <input type="text" name="designation" id="designation" placeholder={{ job.designation }} required>
+        </div>
+
+        <div class="form-group">
+            <label for="work_type">Work Type:</label>
+            <input type="text" name="work_type" id="work_type" placeholder={{ job.work_type }} required>
+        </div>
+
+        <div class="form-group">
+            <label for="involvement">Involvement:</label>
+            <input type="text" name="involvement" id="involvement" placeholder={{ job.involvement }} required>
+        </div>
+
+        <div class="form-group">
+            <label for="level">Level:</label>
+            <input type="text" name="level" id="level" placeholder={{ job.level }} required>
+        </div>
+
+        <div class="form-group">
+            <label for="City">City:</label>
+            <input type="text" name="City" id="City" placeholder={{ job.City }} required>
+        </div>
+
+        <div class="form-group">
+            <label for="State">State:</label>
+            <input type="text" name="State" id="State" placeholder={{ job.State }} required>
+        </div>
+
+        <div class="form-group">
+            <label for="monthly_salary">Monthly Salary:</label>
+            <input type="text" name="monthly_salary" id="monthly_salary" placeholder={{job.monthly_salary}} required>
+        </div>
+
+        <button class="btn btn-primary btn-insert" type="submit">Update</button>
+    </form>
+</div>
 </body>
 </html>

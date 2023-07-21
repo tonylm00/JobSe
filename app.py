@@ -1,6 +1,7 @@
 from bson import ObjectId
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
+from pymongo.errors import PyMongoError
 
 app = Flask(__name__)
 client = MongoClient("mongodb://localhost:27017/")
@@ -16,10 +17,7 @@ def search():
     return render_template("search.html")
 
 '''
-@app.route('/viewAll')
-def viewAll():
-    all = list(collection.find())
-    return render_template("query.html", jobs=all)
+
 
 
 @app.route('/searchByCompany', methods=['POST'])
@@ -30,6 +28,11 @@ def searchByCompany():
     return render_template("query.html", jobs=result)
 
 '''
+@app.template_filter('to_string')
+def to_string(obj):
+    if isinstance(obj, ObjectId):
+        return str(obj)
+    return obj
 
 @app.route('/searchByDesignation', methods=['POST'])
 def searchByDesignation():
@@ -98,45 +101,70 @@ def typeANDsalaryORsame():
     result = list(collection.find(query))
     return render_template("query.html", jobs=result)
 
-#Modifica offerta di lavoro
-@app.route('/updateJob', methods=['POST'])
-def updateJob():
-    id = request.form.get("id")
+@app.route('/updateView')
+def updateView():
+    jobs = list(collection.find())  # Fetch job data from the database
+    return render_template("updateView.html", jobs=jobs)
 
-    document = {'$set': {
-        "designation": request.form.get("designation"),
-        "name": request.form.get("name"),
-        "work_type": request.form.get("work_type"),
-        "involvement": request.form.get("involvement"),
-        "job_details": request.form.get("job_details"),
-        "level": request.form.get("level"),
-    }
-    }
-
-    result = collection.update_one({'_id': ObjectId(id)}, document)
-
-    if result.modified_count > 0:
-        message = "Job updated successfully."
+@app.route('/updateJob/<string:job_id>', methods=['GET', 'POST'])
+def updateJob(job_id):
+    if request.method == 'POST':
+        try:
+            job = {
+                "designation": request.form.get("designation"),
+                "name": request.form.get("name"),
+                "involvement": request.form.get("involvement"),
+                "job_details": request.form.get("job_details"),
+                "industry": request.form.get("industry"),
+                "level": request.form.get("level"),
+                "City": request.form.get("City"),
+                "State": request.form.get("State"),
+                "monthly_salary": request.form.get("monthly_salary")
+            }
+            collection.update_one({"_id": ObjectId(job_id)}, {"$set": job})
+            message = "Job announcement data successfully updated"
+            return render_template("updateView.html", message=message, jobs=list(collection.find()))
+        except PyMongoError as e:
+            message = "Error while updating the job ad.: " + str(e)
     else:
-        message = "No job found matching the given query."
+        job = collection.find_one({"_id": ObjectId(job_id)})  # Fetch the specific job details
+        message = ""
 
-    return render_template("update.html", jobs=result, message=message)
-
+    return render_template("update.html", job=job, message=message)
 
 #Eliminazione offerta di lavoro
-@app.route('/deleteJob', methods=['POST'])
-def deleteJob():
+@app.route('/deleteJob/<string:job_id>', methods=['POST'])
+def deleteJob(job_id):
+    try:
+        collection.delete_one({"_id": ObjectId(job_id)})
+        message = "Job ad successfully deleted"
+    except PyMongoError as e:
+        message = "Error while deleting job announcement" + str(e)
+    return render_template("updateView.html", jobs=list(collection.find()), message=message)
 
-    id = ObjectId(request.form.get("id"))
-    result = collection.delete_one({'_id': id})
-
-    if result.deleted_count > 0:
-        message = "Job deleted successfully."
+@app.route('/insertJob', methods=['GET', 'POST'])
+def insertJob():
+    if request.method == 'POST':
+        try:
+            job = {
+                "designation": request.form.get("designation"),
+                "name": request.form.get("name"),
+                "involvement": request.form.get("involvement"),
+                "job_details": request.form.get("job_details"),
+                "industry": request.form.get("industry"),
+                "level": request.form.get("level"),
+                "City": request.form.get("City"),
+                "State": request.form.get("State"),
+                "monthly_salary": request.form.get("monthly_salary")
+            }
+            collection.insert_one(job)
+            message = "Annuncio di lavoro aggiunto con successo"
+        except PyMongoError as e:
+            message = "Errore durante l'inserimento dell'annuncio di lavoro: " + str(e)
     else:
-        message = "No job found matching the given ID."
+        message = ""
 
-    return render_template("delete.html", message=message)
-
+    return render_template("insert.html", message=message)
 
 if __name__ == '__main__':
     app.run()

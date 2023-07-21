@@ -1,3 +1,4 @@
+<!-- VIEW CHE VISUALIZZA TUTTE LE OFFERTE PER ELIMINARE O CANCELLARE UN LAVORO-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +53,7 @@
             padding-right: 20px;
       }
 
-        .btn-primary {
+          .btn-primary {
             background-color: #007bff;
             color: #ffffff;
             border: none;
@@ -61,13 +62,18 @@
             cursor: pointer;
         }
 
-           .navbar-text{
+          .btn-danger {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+              margin-left: 10px;
+        }
+          .navbar-text{
             padding: 15px;
             collapse: 1;
         }
-
     </style>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -77,11 +83,13 @@
         <a class="navbar-text" href="/updateView">Delete</a>
         <a class="navbar-text" href="/search">Search</a>
     </nav>
-    <div class="results-container">
-        <div class="jumbotron">
-            <p class="lead">Risultati della ricerca</p>
-            <p class="lead">Trovati {{ jobs | length }} lavori</p>
-        </div>
+    <div class="jumbotron">
+        <p class="bold-name">Edit or delete a job offer</p>
+        {% if message != null %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </div>
+       <div class="results-container">
         {% for job in jobs %}
             <div class="result-item">
                 <div class="result-item-text">
@@ -98,9 +106,9 @@
                     </p>
                 </div>
                 <div class="input-group-append">
-                    <form action="/viewJob" method="post">
-                        <input type="hidden" value="{{ job._id }}" name="work">
-                        <button class="btn btn-primary" type="submit">Learn More</button>
+                    <a class="btn btn-primary" href="{{ url_for('updateJob', job_id=job._id) }}">Update</a>
+                    <form action="/deleteJob/{{ job._id }}" method="POST">
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </div>
             </div>
