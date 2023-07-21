@@ -73,10 +73,51 @@
             padding: 15px;
             collapse: 1;
         }
+          .search-bar {
+            justify-content: center;
+              width: 60%;
+            margin-top: 10px;
+              margin-bottom: 10px;
+            display: flex; /* Display the form and submit button on the same line */
+            align-items: center; /* Center the items vertically */
+            border-radius: 20px; /* Add rounded corners */
+            overflow: hidden; /* Hide any overflowed content */
+            background-color: #ffffff; /* Background color similar to the navbar */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+        }
+
+        .search-bar input[type="text"] {
+            flex: 1; /* Take up available space */
+            padding: 10px; /* Add some padding */
+            border: none; /* Remove the border */
+            background-color: transparent; /* Transparent background */
+            font-size: 16px; /* Adjust font size */
+            color: black; /* Text color */
+        }
+
+        .search-bar input[type="submit"] {
+            padding: 10px 20px; /* Add padding around the button */
+            background-color: #ffffff; /* Background color similar to the navbar */
+            border: none; /* Remove the border */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            color: black; /* Text color */
+        }
+
+        .search-bar input[type="submit"]:hover {
+            background-color: #afc9f6; /* Change background color on hover */
+        }
+
+        .container-search {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            /* Add any additional styles as needed */
+        }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">Jobse</a>
         <a class="navbar-text" href="/insertJob">Insert</a>
         <a class="navbar-text" href="/updateView">Update</a>
@@ -88,6 +129,12 @@
         {% if message != null %}
             <p>{{ message }}</p>
         {% endif %}
+    </div>
+    <div class="container-search">
+        <form class="search-bar" action="/search" method="get">
+            <input placeholder="Insert Job Offer Id" class="input" type="text" id="Idjob" name="seach" style="width: 100%">
+            <input type="submit" value="Search">
+        </form>
     </div>
        <div class="results-container">
         {% for job in jobs %}

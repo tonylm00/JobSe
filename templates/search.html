@@ -157,9 +157,66 @@
         .input-container{
             margin:30px;
         }
+
+       .side-menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-right: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Enable vertical scrolling if needed */
+            width: auto; /* Allow the menu to adjust its width based on content */
+            max-width: 70%; /* Set a maximum width for the menu */
+            z-index: 1; /* Ensure the menu is on top of other elements */
+            display: none; /* Hide the menu by default */
+            width: 220px; /* Adjust the width of the menu as needed */
+            padding: 10px;
+        }
+
+        .menu-item {
+            display: block;
+            margin-bottom: 10px;
+            padding: 8px;
+            text-align: center;
+            font-size: 16px;
+            color: #444;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .menu-item:hover {
+            background-color: #eee;
+        }
+
+        .menu-icon {
+            position: fixed;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Align items vertically *
+            margin-right: 5px; /* Add some space between the icon and the words */
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #fff; /* Add a white background to the icon */
+            padding: 5px;
+            border-radius: 50%; /* Make the icon circular */
+            z-index: 2; /* Ensure the icon is on top of other elements */
+        }
     </style>
 </head>
 <body>
+    <div class="menu-icon" onclick="toggleSideMenu()">&#9776;</div> <!-- Add the menu icon -->
+    <div class="side-menu" id="sideMenu">
+        <a class="menu-item" href="/">Jobse</a>
+        <a class="menu-item" href="/insertJob">Insert</a>
+        <a class="menu-item" href="/updateView">Update</a>
+        <a class="menu-item" href="/updateView">Delete</a>
+        <a class="menu-item" href="/search">Search</a>
+    </div>
     <div class="general">
         <div class="first-row">
             <div class="column" id="col1">
@@ -267,6 +324,19 @@
                 }
             }
 
+        }
+
+        function toggleSideMenu() {
+            var sideMenu = document.getElementById('sideMenu');
+            var menuIcon = document.querySelector('.menu-icon');
+
+            if (sideMenu.style.display === 'none') {
+                sideMenu.style.display = 'block';
+                menuIcon.innerHTML = '&#10006;'; // Change the icon to "X"
+            } else {
+                sideMenu.style.display = 'none';
+                menuIcon.innerHTML = '&#9776;'; // Change the icon back to the menu icon
+            }
         }
 
         // Call the function to populate options when the page loads
