@@ -82,18 +82,18 @@ def workANDtype():
 #work_type AND salary OR work type AND salary
 @app.route('/typeANDsalaryORsame', methods=['POST'])
 def typeANDsalaryORsame():
-    work1 = request.form.get("work1")
+    work1 = request.form.get("type1")
     salary1 = request.form.get("salary1")
-    work2 = request.form.get("work2")
+    work2 = request.form.get("type2")
     salary2 = request.form.get("salary2")
 
     query = {
         'or': [
             {
-                '$and': [{'work_type': work1}, {'monthly_salary': {'$lt': salary1}}]
+                '$and': [{'work_type': work1}, {'monthly_salary': {'$gte': salary1}}]
             },
             {
-                '$and': [{'work_type': work2}, {'monthly_salary': {'$lt': salary2}}]
+                '$and': [{'work_type': work2}, {'monthly_salary': {'$gte': salary2}}]
             }
         ]
     }
