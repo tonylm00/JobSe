@@ -88,12 +88,12 @@ def typeANDsalaryORsame():
     salary2 = request.form.get("salary2")
 
     query = {
-        'or': [
+        '$or': [
             {
-                '$and': [{'work_type': work1}, {'monthly_salary': {'$gte': salary1}}]
+                '$and': [{'work_type': work1}, {'monthly_salary': {'$gte': int(salary1)}}]
             },
             {
-                '$and': [{'work_type': work2}, {'monthly_salary': {'$gte': salary2}}]
+                '$and': [{'work_type': work2}, {'monthly_salary': {'$gte': int(salary2)}}]
             }
         ]
     }
