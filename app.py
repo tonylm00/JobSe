@@ -207,7 +207,7 @@ def insertJob():
                 "level": request.form.get("level"),
                 "City": request.form.get("City"),
                 "State": request.form.get("State"),
-                "monthly_salary": request.form.get("monthly_salary")
+                "monthly_salary": int(request.form.get("monthly_salary"))
             }
             collection.insert_one(job)
             message = "Annuncio di lavoro aggiunto con successo"
