@@ -17,12 +17,12 @@
         }
 
         .jumbotron {
-            background-color: #f8f9fa;
             padding: 20px;
             text-align: center;
         }
 
         .lead {
+            font-weight: bold;
             font-size: 24px;
             font-weight: bold;
         }
@@ -98,8 +98,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">Jobse</a>
         <a class="navbar-text" href="/insertJob">Insert</a>
-        <a class="navbar-text" href="/updateView?page=1">Update</a>
-        <a class="navbar-text" href="/updateView?page=1">Delete</a>
+        <a class="navbar-text" href="/updateView?page=1">Modify</a>
         <a class="navbar-text" href="/search">Search</a>
     </nav>
 <div class="jumbotron">
@@ -112,7 +111,7 @@
 <div class="results-container">
     <form action="/insertJob" method="POST">
         <div class="form-group">
-            <label for="name">Name:</label>
+            <label for="name">Organization name:</label>
             <input type="text" name="name" id="name" required>
         </div>
 
