@@ -29,14 +29,18 @@ dataset['level'].replace('Not Avilable', 'To be determined based on experience',
 # inputazione di industry sulla base di designation'
 grouped_data = dataset.groupby('designation')
 
-
 def replace_nan_with_mode(x):
     mode_value = x.mode()
     fill_value = mode_value.iloc[0] if not mode_value.empty else "Unknown"
     return x.fillna(fill_value)
 
-
 dataset['industry'] = grouped_data['industry'].transform(replace_nan_with_mode)
+
+# Elimina le righe con "City" mancante (NaN)
+dataset = dataset.dropna(subset=['City'])
+
+# Sostituisci i valori nulli di 'monthly_salary' con la media dei valori di 'monthly_salary' delle righe con lo stesso valore di 'designation'
+dataset['monthly_salary'] = dataset.groupby('designation')['monthly_salary'].transform(lambda x: x.fillna(x.mean()))
 
 #save csv
 dataset.to_csv('cleaned_data.csv')

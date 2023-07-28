@@ -86,7 +86,14 @@
             <div class="result-item">
                 <div class="result-item-text">
                     <p class="bold-name">{{ job.name }} - {{ job.designation }}</p>
-                    <p>{{ job.work_type }} - {{ job.involvement }}</p>
+                    <p>
+                        {% if job.work_type %}
+                            {{ job.work_type }}
+                        {% endif %}
+                        {% if job.involvement %}
+                             {{ job.involvement }}
+                        {% endif %}
+                    </p>
                     <p>{{ job.level }}</p>
                 </div>
                 <div class="salary-luogo">

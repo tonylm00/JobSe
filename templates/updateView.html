@@ -162,10 +162,13 @@
                     <p>{{ job.level }}</p>
                 </div>
                 <div class="salary-luogo">
-                    <p>{{ job.monthly_salary}} $</p>
+                    <p>{{ job.monthly_salary | int }} $</p>
                     <p>
                         {% if job.City %}
                             {{ job.City }} - {{ job.State }}
+                        {% endif %}
+                        {% if job.State %}
+                            - {{ job.State }}
                         {% endif %}
                     </p>
                 </div>
