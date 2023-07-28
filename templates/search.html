@@ -46,7 +46,7 @@
 
         .form-container-large {
             width: 80%;
-            padding: 20px;
+            padding: 30px;
             border: 1px solid #ccc;
             background-color: #f9f9f9;
             border-radius: 10px;
@@ -168,12 +168,10 @@
             border-right: 1px solid #ccc;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow-y: auto; /* Enable vertical scrolling if needed */
-            width: auto; /* Allow the menu to adjust its width based on content */
             max-width: 70%; /* Set a maximum width for the menu */
             z-index: 1; /* Ensure the menu is on top of other elements */
             display: none; /* Hide the menu by default */
             width: 220px; /* Adjust the width of the menu as needed */
-            padding: 10px;
         }
 
         .menu-item {
@@ -195,7 +193,7 @@
         .menu-icon {
             position: fixed;
             display: flex; /* Use flexbox for layout */
-            align-items: center; /* Align items vertically *
+            align-items: center; /* Align items vertically */
             margin-right: 5px; /* Add some space between the icon and the words */
             top: 20px;
             left: 20px;
@@ -225,10 +223,8 @@
                     <label for="input1">Job Title 1:</label>
                     <form action="/workORwork" method="POST">
                         <select class="input" id="input1" name="work1" required></select>
-                        <br>
                         <label for="input2">Job Title 2:</label>
                         <select class="input" id="input2" name="work2" required></select>
-                        <br>
                         <button type="submit" class="my-button">Search</button>
                     </form>
                 </div>
@@ -241,13 +237,12 @@
                     <label for="jobTitle">Job Title:</label>
                     <form action="/workANDtype" method="POST">
                         <select class="input" id="input1" name="work" required></select>
-                        <br>
                         <label for="jobType">Job Type:</label>
                         <select id="jobType" name="type" required>
                             <option value="On-site">On-site</option>
                             <option value="Remote">Remote</option>
+                            <option value="Hybrid">Hybrid</option>
                         </select>
-                        <br>
                         <button type="submit" class="my-button">Search</button>
                     </form>
                 </div>
@@ -279,7 +274,6 @@
                             <input class="input" type="number" id="salary2" name="salary2" required>
                         </div>
                     </div>
-                    <br>
                     <button type="submit" class="my-button">Search</button>
                 </form>
             </div>

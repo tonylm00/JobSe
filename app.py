@@ -17,9 +17,6 @@ def search():
     return render_template("search.html")
 
 '''
-
-
-
 @app.route('/searchByCompany', methods=['POST'])
 def searchByCompany():
     company = request.form.get("company")
@@ -69,7 +66,7 @@ def workORwork():
 def workANDtype():
     work = request.form.get("work")
     type = request.form.get("type")
-    print("work: ",work," type: ",type)
+
     query = {
         '$and': [
             {'designation': work},
@@ -97,7 +94,7 @@ def typeANDsalaryORsame():
             }
         ]
     }
-    print(query)
+
     result = list(collection.find(query))
     return render_template("query.html", jobs=result)
 
@@ -115,7 +112,7 @@ def updateView():
     end_page = page_number + 5
 
     jobs = list(collection.find())  # Fetch job data from the database
-    print(jobs)
+
     page_data = jobs[start_index:end_index]
     return render_template("updateView.html", jobs=page_data,
         current_page=page_number,
